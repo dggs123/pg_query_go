@@ -2,6 +2,15 @@
 
 package pg_query
 
-func (node RowExpr) Deparse() string {
-	panic("Not Implemented")
+import (
+	"fmt"
+	"strings"
+)
+
+func (node RowExpr) Deparse(ctx DeparseContext) (string, error) {
+	out, err := node.Args.DeparseList(ctx)
+	if err != nil {
+		return "", nil
+	}
+	return fmt.Sprintf("(%s)", strings.Join(out, ", ")), nil
 }

@@ -2,6 +2,8 @@
 
 package pg_query
 
-func (node BitString) Deparse() string {
-	panic("Not Implemented")
+import "fmt"
+
+func (node BitString) Deparse(ctx DeparseContext) (string, error) {
+	return fmt.Sprintf("B'%s'", node.Str), nil
 }
